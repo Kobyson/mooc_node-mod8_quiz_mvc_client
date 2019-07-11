@@ -66,8 +66,8 @@ const playController = (id) => {
 
 const checkController = (id) => {
     let {question, answer } = JSON.parse(localStorage.quizzes)[id];
-    let my_answer = $('#answer').val();
-    let response = (my_answer===answer) ?
+    let my_answer = $('#answer').val().toLowerCase().trim();
+    let response = (my_answer===answer.toLowerCase().trim()) ?
           `Yes, "${my_answer}" is the ${question}`
         : `No, "${my_answer}" is not the ${question}`;
     $('#msg').html(response);
@@ -102,7 +102,8 @@ const createController = () => {
 const deleteController = (id) => {
     // ..... introducir código
     let quizzes = JSON.parse(localStorage.quizzes); 
-    //falta Codigo
+    quizzes.splice(id,1);
+    localStorage.quizzes = JSON.stringify(quizzes);
     indexController();
 };
 
@@ -136,6 +137,11 @@ $(function(){
 </script>
 </head>
 <body>
+<aside>
+    <div>
+        <img src="img/quiz.png" >
+    </div>
+</aside>
 <section>
     <article>
         <div>
